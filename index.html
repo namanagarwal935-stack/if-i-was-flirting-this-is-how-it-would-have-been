@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Anima ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500&display=swap');
+
+        body {
+            background-color: #fff0f3;
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container { width: 100%; max-width: 600px; padding: 20px; }
+        .hidden { display: none !important; }
+        
+        h1 { 
+            color: #c9184a; 
+            font-family: 'Pacifico', cursive; 
+            font-size: 28px; 
+            min-height: 60px; 
+            margin-bottom: 20px;
+        }
+
+        img { 
+            width: 280px; 
+            height: 280px; 
+            object-fit: cover; 
+            border-radius: 25px; 
+            border: 8px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+        }
+
+        button { 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+
+        /* Initial Start Button */
+        #start-btn { 
+            padding: 15px 40px; 
+            border-radius: 50px; 
+            background: #ff4d6d; 
+            color: white; 
+            font-size: 20px; 
+        }
+
+        /* YES = GREEN CIRCLE */
+        #yes-btn { 
+            background-color: #28a745; 
+            color: white; 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            font-size: 18px;
+            z-index: 999;
+        }
+
+        /* NO = RED CIRCLE */
+        #no-btn { 
+            background-color: #dc3545; 
+            color: white; 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            font-size: 18px;
+            position: relative;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 35px;
+            margin-top: 20px;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="page1">
+            <img src="page1.avif" alt="Solo Cat">
+            <h1>I have a question to ask...</h1>
+            <button id="start-btn" onclick="goToPage2()">Click to find out</button>
+        </div>
+
+        <div id="page2" class="hidden">
+            <img src="page2.avif" alt="Couple Cats">
+            <h1 id="typewriter"></h1>
+            <div class="btn-container">
+                <button id="yes-btn" onclick="goToPage3()">Yes!</button>
+                <button id="no-btn" onmouseover="moveNo()">No</button>
+            </div>
+        </div>
+
+        <div id="page3" class="hidden">
+            <img src="page3.jpg" alt="Happy Celebration">
+            <h1>Yay! Did you really think you had a choice? ❤️</h1>
+        </div>
+    </div>
+
+    <script>
+        let index = 0;
+        let yesSize = 90;
+        const msg = "Anima, will you be my Valentine? 🌹";
+
+        function goToPage2() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+            typeEffect();
+        }
+
+        function typeEffect() {
+            if (index < msg.length) {
+                document.getElementById('typewriter').innerHTML += msg.charAt(index);
+                index++;
+                setTimeout(typeEffect, 90);
+            }
+        }
+
+        function moveNo() {
+            const no = document.getElementById('no-btn');
+            const yes = document.getElementById('yes-btn');
+
+            no.style.position = 'absolute';
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 120);
+            no.style.left = x + 'px';
+            no.style.top = y + 'px';
+
+            // Increase Yes size
+            yesSize += 35;
+            yes.style.width = yesSize + 'px';
+            yes.style.height = yesSize + 'px';
+            yes.style.fontSize = (yesSize / 4.5) + 'px';
+        }
+
+        function goToPage3() {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
